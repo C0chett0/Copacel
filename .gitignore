@@ -1,0 +1,7 @@
+.idea
+Dockerfile
+vendor
+docker*
+composer.lock
+composer.phar
+.env
