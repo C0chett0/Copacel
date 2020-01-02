@@ -12,12 +12,13 @@ use jamesiarmes\PhpEws\Enumeration\DefaultShapeNamesType;
 
 class AbstractEntry
 {
-    protected static function getAddressbook() {
+    protected static function getAddressbook()
+    {
         $request = new FindItemType();
         $request->ParentFolderIds = new NonEmptyArrayOfBaseFolderIdsType();
 
         $request->ItemShape = new ItemResponseShapeType();
-        $request->ItemShape->BaseShape =DefaultShapeNamesType::DEFAULT_PROPERTIES;
+        $request->ItemShape->BaseShape = DefaultShapeNamesType::DEFAULT_PROPERTIES;
 
         $folder_id = new DistinguishedFolderIdType();
         $folder_id->Id = DistinguishedFolderIdNameType::CONTACTS;
@@ -26,7 +27,8 @@ class AbstractEntry
         return self::parseResponses(Client::getInstance()->FindItem($request));
     }
 
-    private static function parseResponses($response) {
+    private static function parseResponses($response)
+    {
         $result = [];
         $response_messages = $response->ResponseMessages->FindItemResponseMessage;
         foreach ($response_messages as $response_message) {
@@ -45,8 +47,8 @@ class AbstractEntry
                     'id' => $list->ItemId->Id
                 ];
             }
-
-            return $result;
         }
+
+        return $result;
     }
 }
