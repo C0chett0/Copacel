@@ -15,6 +15,7 @@
   "autoload": {
     "psr-4": {
       "C0chett0\\CopacelEws\\": "src/"
-    }
+    },
+    "files": [ "src/functions.php" ]
   }
 }
