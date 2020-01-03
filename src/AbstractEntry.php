@@ -47,6 +47,23 @@ class AbstractEntry
                     'id' => $list->ItemId->Id
                 ];
             }
+
+            $contacts = $response_message->RootFolder->Items->Contact;
+            foreach ($contacts as $contact) {
+                $result['contacts'][] = [
+                    'firstname' => $contact->CompleteName->FirstName,
+                    'lastname' => $contact->CompleteName->LastName,
+                    'emails' => (!is_null($contact->EmailAddresses)) ? array_pluck($contact->EmailAddresses->Entry, "_") : [],
+                    'addresses' => (!is_null($contact->PhysicalAddresses)) ? array_map(function ($entry) {
+                        return $entry->Street . " " . $entry->PostalCode . " " . $entry->City;
+                    }, $contact->PhysicalAddresses->Entry) : [],
+                    'phones' => (!is_null($contact->PhoneNumbers)) ? array_pluck($contact->PhoneNumbers->Entry, "_") : [],
+                    'company' => $contact->CompanyName,
+                    'factory' => $contact->OfficeLocation,
+                    'job' => $contact->JobTitle,
+                    'id' => $contact->ItemId->Id
+                ];
+            }
         }
 
         return $result;
