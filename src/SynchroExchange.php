@@ -47,7 +47,7 @@ use jamesiarmes\PhpEws\Type\TargetFolderIdType;
 
 class SynchroExchange implements SynchroExchangeInterface
 {
-    public static function createList($name, $contacts = null)
+    public static function createList($name, $contacts = [])
     {
         $request = new CreateItemType();
         $request->Items = new NonEmptyArrayOfAllItemsType();
