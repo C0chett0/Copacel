@@ -8,6 +8,8 @@ interface SynchroExchangeInterface
 {
     public static function createList($name);
 
+    public static function renameList($listId, $name);
+
     public static function addContactsToList($listId, $contacts);
 
     public static function removeContactsFromList($listId, $contacts);

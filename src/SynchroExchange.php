@@ -88,6 +88,15 @@ class SynchroExchange implements SynchroExchangeInterface
         return false;
     }
 
+    public static function renameList($listId, $name)
+    {
+        $actualMembers = self::getContacts($listId);
+
+        self::deleteList($listId);
+
+        return self::createList($name, $actualMembers);
+    }
+
     public static function addContactsToList($listId, $contacts)
     {
         $request = new UpdateItemType();
