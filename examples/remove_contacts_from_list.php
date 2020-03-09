@@ -8,8 +8,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
 $id = SynchroExchange::createList('Mailing List With Members', [
-    'test@mail.fr',
-    'test2@mail.com'
+    ['email' => 'test@mail.fr', 'name' => 'test'],
+    ['email' => 'test2@mail.com', 'name' => 'Mon nom']
 ]);
 
 echo SynchroExchange::removeContactsFromList($id, [

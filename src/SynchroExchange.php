@@ -135,13 +135,11 @@ class SynchroExchange implements SynchroExchangeInterface
         self::emptyList($listId);
         return self::addContactsToList(
             $listId,
-            array_column(
                 array_filter(
                     $actualMembers,
                     function ($contact) use ($contacts) {
-                        return !in_array($contact['address'], $contacts);
-                    }),
-                'address')
+                        return !in_array($contact['email'], $contacts);
+                    })
         );
     }
 
@@ -472,7 +470,8 @@ class SynchroExchange implements SynchroExchangeInterface
                     foreach ($list->Members->Member as $member) {
                         $contacts[] = [
                             'id' => $member->Key,
-                            'address' => $member->Mailbox->EmailAddress
+                            'email' => $member->Mailbox->EmailAddress,
+                            'name' => $member->Mailbox->Name,
                         ];
                     }
                 }

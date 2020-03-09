@@ -14,6 +14,6 @@ echo SynchroExchange::createList('Mailing List');
  */
 
 echo SynchroExchange::createList('Mailing List With Members', [
-    'test@mail.fr',
-    'test2@mail.com'
+    ['email' => 'test@mail.fr', 'name' => 'test'],
+    ['email' => 'test2@mail.com', 'name' => 'Mon nom']
 ]);

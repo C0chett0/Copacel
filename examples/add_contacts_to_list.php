@@ -10,6 +10,6 @@ $dotenv->load();
 $id =  SynchroExchange::createList('Mailing List With Members');
 
 echo SynchroExchange::addContactsToList($id, [
-    'test@mail.fr',
-    'test2@mail.com'
+    ['email' => 'test@mail.fr', 'name' => 'test'],
+    ['email' => 'test2@mail.com', 'name' => 'Mon nom']
 ]);
