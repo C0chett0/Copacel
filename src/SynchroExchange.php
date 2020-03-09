@@ -14,6 +14,7 @@ use jamesiarmes\PhpEws\Enumeration\DefaultShapeNamesType;
 use jamesiarmes\PhpEws\Enumeration\DictionaryURIType;
 use jamesiarmes\PhpEws\Enumeration\DisposalType;
 use jamesiarmes\PhpEws\Enumeration\EmailAddressKeyType;
+use jamesiarmes\PhpEws\Enumeration\FileAsMappingType;
 use jamesiarmes\PhpEws\Enumeration\MailboxTypeType;
 use jamesiarmes\PhpEws\Enumeration\PhoneNumberKeyType;
 use jamesiarmes\PhpEws\Enumeration\PhysicalAddressKeyType;
@@ -183,6 +184,7 @@ class SynchroExchange implements SynchroExchangeInterface
         $request->SavedItemFolderId->FolderId->Id = Client::getContactsFolderId();
 
         $exchangeContact = new ContactItemType();
+        $exchangeContact->FileAsMapping = FileAsMappingType::LAST_COMMA_FIRST;
         $exchangeContact->GivenName = $contact['firstname'];
         $exchangeContact->Surname = $contact['lastname'];
 
