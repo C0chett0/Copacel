@@ -65,7 +65,8 @@ class SynchroExchange implements SynchroExchangeInterface
         foreach ($contacts as $contact) {
             $member = new MemberType();
             $member->Mailbox = new EmailAddressType();
-            $member->Mailbox->EmailAddress = $contact;
+            $member->Mailbox->EmailAddress = $contact['email'];
+            $member->Mailbox->Name = $contact['name'];
 
             $distributionList->Members->Member[] = $member;
         }
@@ -107,7 +108,8 @@ class SynchroExchange implements SynchroExchangeInterface
         foreach ($contacts as $contact) {
             $member = new MemberType();
             $member->Mailbox = new EmailAddressType();
-            $member->Mailbox->EmailAddress = $contact;
+            $member->Mailbox->EmailAddress = $contact['email'];
+            $member->Mailbox->Name = $contact['name'];
 
             $field->DistributionList->Members->Member[] = $member;
         }
