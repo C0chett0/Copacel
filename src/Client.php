@@ -36,7 +36,7 @@ class Client
         if (! self::$instance) {
             self::$instance = new BaseClient(
                 getenv('SERVER'),
-                getenv('USERNAME'),
+                getenv('LOGIN'),
                 getenv('PASSWORD'),
                 getenv('VERSION')
             );
