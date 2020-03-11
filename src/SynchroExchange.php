@@ -188,24 +188,25 @@ class SynchroExchange implements SynchroExchangeInterface
         $exchangeContact->GivenName = $contact['firstname'];
         $exchangeContact->Surname = $contact['lastname'];
 
+        if(array_key_exists('email', $contact) && $contact['email']) {
+            $exchangeEmail = new EmailAddressDictionaryEntryType();
+            $exchangeEmail->Key = EmailAddressKeyType::EMAIL_ADDRESS_1;
+            $exchangeEmail->_ = $contact['email'];
+            $exchangeContact->EmailAddresses->Entry[] = $exchangeEmail;
+        }
 
-        $exchangeEmail = new EmailAddressDictionaryEntryType();
-        $exchangeEmail->Key = EmailAddressKeyType::EMAIL_ADDRESS_1;
-        $exchangeEmail->_ = $contact['email'];
-        $exchangeContact->EmailAddresses->Entry[] = $exchangeEmail;
-
-
-        $address = new PhysicalAddressDictionaryEntryType();
-        $address->Key = PhysicalAddressKeyType::BUSINESS;
-        $address->Street = $contact['address'];
-        $exchangeContact->PhysicalAddresses->Entry[] = $address;
+        if(array_key_exists('address', $contact) && $contact['address']) {
+            $address = new PhysicalAddressDictionaryEntryType();
+            $address->Key = PhysicalAddressKeyType::BUSINESS;
+            $address->Street = $contact['address'];
+            $exchangeContact->PhysicalAddresses->Entry[] = $address;
+        }
 
         $exchangeContact->CompanyName = $contact['company'];
         $exchangeContact->OfficeLocation = $contact['factory'];
         $exchangeContact->JobTitle = $contact['job'];
 
-        $exchangeContact->PhoneNumbers = new PhoneNumberDictionaryType();
-
+        $flag = false;
         foreach (['fix', 'fax', 'mobile'] as $key) {
             switch($key) {
                 case 'fix':
@@ -221,6 +222,10 @@ class SynchroExchange implements SynchroExchangeInterface
                     continue;
             }
             if(array_key_exists($key, $contact) && $contact[$key]) {
+                if (!$flag) {
+                    $flag = true;
+                    $exchangeContact->PhoneNumbers = new PhoneNumberDictionaryType();
+                }
                 $phone = new PhoneNumberDictionaryEntryType();
                 $phone->Key = $keyType;
                 $phone->_ = $contact[$key];
