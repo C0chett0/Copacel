@@ -23,4 +23,8 @@ interface SynchroExchangeInterface
     public static function deleteContact($contactId);
 
     public static function purge();
+
+    public static function purgeContacts();
+
+    public static function purgeLists();
 }

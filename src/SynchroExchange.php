@@ -458,6 +458,52 @@ class SynchroExchange implements SynchroExchangeInterface
         return true;
     }
 
+    public static function purgeContacts()
+    {
+        $request = new EmptyFolderType();
+        $request->DeleteType = DisposalType::HARD_DELETE;
+        $request->DeleteSubFolders = false;
+
+        $request->FolderIds = new NonEmptyArrayOfBaseFolderIdsType();
+        $contactsId = new FolderIdType();
+        $contactsId->Id = Client::getContactsFolderId();
+        $request->FolderIds->FolderId = [
+            $contactsId
+        ];
+
+        $response = Client::getInstance()->EmptyFolder($request);
+        foreach ($response->ResponseMessages->EmptyFolderResponseMessage as $message) {
+            if ($message->ResponseClass != ResponseClassType::SUCCESS) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static function purgeLists()
+    {
+        $request = new EmptyFolderType();
+        $request->DeleteType = DisposalType::HARD_DELETE;
+        $request->DeleteSubFolders = false;
+
+        $request->FolderIds = new NonEmptyArrayOfBaseFolderIdsType();
+        $listsId = new FolderIdType();
+        $listsId->Id = Client::getListsFolderId();
+        $request->FolderIds->FolderId = [
+            $listsId
+        ];
+
+        $response = Client::getInstance()->EmptyFolder($request);
+        foreach ($response->ResponseMessages->EmptyFolderResponseMessage as $message) {
+            if ($message->ResponseClass != ResponseClassType::SUCCESS) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     protected static function getContacts($id)
     {
         $contacts = [];
