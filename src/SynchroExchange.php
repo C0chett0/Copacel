@@ -219,7 +219,7 @@ class SynchroExchange implements SynchroExchangeInterface
                     $keyType = PhoneNumberKeyType::MOBILE_PHONE;
                     break;
                 default:
-                    continue;
+                    continue 2;
             }
             if(array_key_exists($key, $contact) && $contact[$key]) {
                 if (!$flag) {
