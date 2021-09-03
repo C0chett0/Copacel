@@ -10,7 +10,7 @@
   ],
   "require": {
     "php-ews/php-ews": "~1.0",
-    "vlucas/phpdotenv": "dev-master"
+    "vlucas/phpdotenv": "4 - 5r"
   },
   "autoload": {
     "psr-4": {
